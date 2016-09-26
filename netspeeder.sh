@@ -42,12 +42,13 @@ rpm -Uvh epel-release*rpm
 yum install -y libnet libnet-devel libpcap libpcap-devel gcc
 
 if ! wget --no-check-certificate -O /usr/local/netspeeder.zip https://github.com/crazy886/netspeeder/releases/download/0.1/netspeeder.zip; then
-    echo "下载 netspeeder.zip 文件失败！"
+    echo -e "下载 netspeeder.zip 文件失败！"
     exit 1
 else
-    unzip -d /usr/local /usr/local/netspeeder.zip
+    cd /usr/local
+	unzip netspeeder.zip
 fi
-cd /usr/local/net_speeder
+cd /usr/local/netspeeder
 if [ -f /proc/user_beancounters ] || [ -d /proc/bc ]; then
     sh build.sh -DCOOKED
     INTERFACE=venet0
@@ -56,5 +57,11 @@ else
     INTERFACE=eth0
 fi
 
-echo -e "\033[36m net_speeder 安装完成. \033[0m"
-echo -e "\033[36m 用法: nohup /usr/local/net_speeder/net_speeder $INTERFACE \"ip\" >/dev/null 2>&1 & \033[0m"
+if [ -e /usr/local/netspeeder/net_speeder ]; then
+    mv /usr/local/netspeeder/net_speeder /usr/local/net_speeder
+	rm -rf /usr/local/netspeeder
+    echo -e "\033[36m net_speeder 安装完成. \033[0m"
+    echo -e "\033[36m 用法: nohup /usr/local/net_speeder $INTERFACE \"ip\" >/dev/null 2>&1 & \033[0m"
+else
+    echo -e "编译 net_speeder 失败！"
+fi

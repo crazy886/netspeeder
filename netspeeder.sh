@@ -26,8 +26,7 @@ elif egrep -q "6.*" /etc/issue; then
     OST=6
     wget http://dl.fedoraproject.org/pub/epel/6/${OSB}/epel-release-6-8.noarch.rpm
 else
-    echo -e "\033[31m 错误: 请重新安装 CentOS 5 或 6 版本. \033[0m"
-    exit 1
+    wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
 fi
 
 rpm -Uvh epel-release*rpm

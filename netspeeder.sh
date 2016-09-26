@@ -45,15 +45,11 @@ function centOS(){
 		echo -e "\033[31m下载 epel 文件失败！\033[0m"
 	        exit 1
 	    fi
-	elif egrep -q "7.*" /etc/issue; then
-	    OST=7
+	else
 	    if ! wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm; then
 		echo -e "\033[31m下载 epel 文件失败！\033[0m"
 	        exit 1
 	    fi
-	else
-	    echo -e "\033[31m错误: 不能确定 CentOS 的版本.\033[0m"
-	    exit 1
 	fi
 	
 	rpm -Uvh epel-release*rpm

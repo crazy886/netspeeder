@@ -42,10 +42,10 @@ rpm -Uvh epel-release*rpm
 yum install -y libnet libnet-devel libpcap libpcap-devel gcc
 
 if ! wget --no-check-certificate -O /usr/local/netspeeder.zip https://github.com/crazy886/netspeeder/releases/download/0.1/netspeeder.zip; then
-    echo -e "\033[31m下载 netspeeder.zip 失败！\033[0m"
+    echo "下载 netspeeder.zip 文件失败！"
     exit 1
 else
-	unzip /usr/local/netspeeder.zip
+    unzip -d /usr/local /usr/local/netspeeder.zip
 fi
 cd /usr/local/net_speeder
 if [ -f /proc/user_beancounters ] || [ -d /proc/bc ]; then

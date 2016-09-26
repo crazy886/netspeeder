@@ -46,7 +46,7 @@ if ! wget --no-check-certificate -O /usr/local/netspeeder.zip https://github.com
     exit 1
 else
     cd /usr/local
-	unzip netspeeder.zip
+    unzip netspeeder.zip
 fi
 cd /usr/local/netspeeder
 if [ -f /proc/user_beancounters ] || [ -d /proc/bc ]; then
@@ -58,10 +58,8 @@ else
 fi
 
 if [ -e /usr/local/netspeeder/net_speeder ]; then
-    mv /usr/local/netspeeder/net_speeder /usr/local/net_speeder
-	rm -rf /usr/local/netspeeder
     echo -e "\033[36m net_speeder 安装完成. \033[0m"
-    echo -e "\033[36m 用法: nohup /usr/local/net_speeder $INTERFACE \"ip\" >/dev/null 2>&1 & \033[0m"
+	echo -e "\033[36m 用法: nohup /usr/local/netspeeder/net_speeder $INTERFACE \"ip\" >/dev/null 2>&1 & \033[0m"
 else
     echo -e "编译 net_speeder 失败！"
 fi

@@ -16,7 +16,7 @@ if [ $(arch) == x86_64 ]; then
 elif [ $(arch) == i686 ]; then
     OSB=i386
 else
-    echo "\033[31m Error: Unable to Determine OS Bit. \033[0m"
+    echo -e "\033[31m 错误: 不能确定 CentOS 的平台. \033[0m"
     exit 1
 fi
 if egrep -q "5.*" /etc/issue; then
@@ -26,15 +26,15 @@ elif egrep -q "6.*" /etc/issue; then
     OST=6
     wget http://dl.fedoraproject.org/pub/epel/6/${OSB}/epel-release-6-8.noarch.rpm
 else
-    echo -e "\033[31m 错误: 不能确定操作系统的版本. \033[0m"
+    echo -e "\033[31m 错误: 请重新安装 CentOS 5 或 6 版本. \033[0m"
     exit 1
 fi
 
 rpm -Uvh epel-release*rpm
 yum install -y libnet libnet-devel libpcap libpcap-devel gcc
 
-wget https://github.com/snooda/net-speeder/archive/master.zip -O /usr/local/master.zip|unzip
-cd /usr/local/net-speeder-master
+wget https://github.com/crazy886/netspeeder/releases/download/0.1/netspeeder.zip -O /usr/local/netspeeder.zip|unzip
+cd /usr/local/net_speeder
 if [ -f /proc/user_beancounters ] || [ -d /proc/bc ]; then
     sh build.sh -DCOOKED
     INTERFACE=venet0
@@ -43,9 +43,5 @@ else
     INTERFACE=eth0
 fi
 
-NS_PATH=/usr/local/net_speeder
-mkdir -p $NS_PATH
-cp -Rf net_speeder $NS_PATH
-
-echo -e "\033[36m net_speeder installed. \033[0m"
-echo -e "\033[36m Usage: nohup ${NS_PATH}/net_speeder $INTERFACE \"ip\" >/dev/null 2>&1 & \033[0m"
+echo -e "\033[36m net_speeder 安装完成. \033[0m"
+echo -e "\033[36m 用法: nohup /usr/local/net_speeder/net_speeder $INTERFACE \"ip\" >/dev/null 2>&1 & \033[0m"
